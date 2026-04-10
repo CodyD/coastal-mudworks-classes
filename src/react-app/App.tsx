@@ -1,66 +1,43 @@
-// src/App.tsx
-
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import cloudflareLogo from "./assets/Cloudflare_Logo.svg";
-import honoLogo from "./assets/hono.svg";
+import { useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
-	const [count, setCount] = useState(0);
-	const [name, setName] = useState("unknown");
+type Config = {
+  text: string;
+  availableDatetime: string;
+  url: string;
+};
 
-	return (
-		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-				<a href="https://hono.dev/" target="_blank">
-					<img src={honoLogo} className="logo cloudflare" alt="Hono logo" />
-				</a>
-				<a href="https://workers.cloudflare.com/" target="_blank">
-					<img
-						src={cloudflareLogo}
-						className="logo cloudflare"
-						alt="Cloudflare logo"
-					/>
-				</a>
-			</div>
-			<h1>Vite + React + Hono + Cloudflare</h1>
-			<div className="card">
-				<button
-					onClick={() => setCount((count) => count + 1)}
-					aria-label="increment"
-				>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<div className="card">
-				<button
-					onClick={() => {
-						fetch("/api/")
-							.then((res) => res.json() as Promise<{ name: string }>)
-							.then((data) => setName(data.name));
-					}}
-					aria-label="get name"
-				>
-					Name from API is: {name}
-				</button>
-				<p>
-					Edit <code>worker/index.ts</code> to change the name
-				</p>
-			</div>
-			<p className="read-the-docs">Click on the logos to learn more</p>
-		</>
-	);
+function isDatetimeReached(datetimeStr: string): boolean {
+  if (!datetimeStr) return false;
+  const nyNow = new Date().toLocaleString("sv-SE", {
+    timeZone: "America/New_York",
+  });
+  return nyNow >= datetimeStr.replace("T", " ");
+}
+
+function App() {
+  const id = new URLSearchParams(window.location.search).get("id");
+  const [config, setConfig] = useState<Config | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+    fetch(`/api/config/${encodeURIComponent(id)}`)
+      .then((r) => (r.ok ? (r.json() as Promise<Config>) : Promise.reject()))
+      .then(setConfig)
+      .catch(() => {}); // stay inactive on error or missing id
+  }, [id]);
+
+  const isActive = config !== null && isDatetimeReached(config.availableDatetime);
+  const text = config?.text ?? "";
+
+  if (isActive) {
+    return (
+      <a href={config!.url} className="btn">
+        {text}
+      </a>
+    );
+  }
+  return <button className="btn">{text}</button>;
 }
 
 export default App;

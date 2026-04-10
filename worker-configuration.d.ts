@@ -6,6 +6,9 @@ declare namespace Cloudflare {
 		mainModule: typeof import("./src/worker/index");
 	}
 	interface Env {
+		BUTTON_CONFIG: KVNamespace;
+		CF_ACCESS_AUD: string;
+		CF_ACCESS_TEAM_DOMAIN: string;
 	}
 }
 interface Env extends Cloudflare.Env {}

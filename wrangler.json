@@ -11,5 +11,15 @@
 	"assets": {
 		"directory": "./dist/client",
 		"not_found_handling": "single-page-application"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "BUTTON_CONFIG",
+			"id": "YOUR_KV_NAMESPACE_ID"
+		}
+	],
+	"vars": {
+		"CF_ACCESS_AUD": "",
+		"CF_ACCESS_TEAM_DOMAIN": ""
 	}
 }

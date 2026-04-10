@@ -1,0 +1,124 @@
+.update {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #1a1a1a;
+}
+
+.update h1 {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.update h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.update section {
+  margin-bottom: 2.5rem;
+}
+
+.update form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 480px;
+}
+
+.update label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.update .tz {
+  font-weight: 400;
+  color: #666;
+}
+
+.update input {
+  padding: 0.45em 0.7em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.update input:disabled {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.update button {
+  padding: 0.4em 1em;
+  font-size: 0.875rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.update button[type="submit"] {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+.status {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.empty {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.update table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.update th,
+.update td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.update th {
+  font-weight: 600;
+  color: #444;
+}
+
+.update td code {
+  background: #f3f3f3;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.update td a {
+  color: #2563eb;
+  word-break: break-all;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
