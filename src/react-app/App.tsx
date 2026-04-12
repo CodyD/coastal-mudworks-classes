@@ -16,16 +16,14 @@ function isDatetimeReached(datetimeStr: string): boolean {
 }
 
 function App() {
-  const id = new URLSearchParams(window.location.search).get("id");
   const [config, setConfig] = useState<Config | null>(null);
 
   useEffect(() => {
-    if (!id) return;
-    fetch(`/api/config/${encodeURIComponent(id)}`)
+    fetch("/api/config")
       .then((r) => (r.ok ? (r.json() as Promise<Config>) : Promise.reject()))
       .then(setConfig)
-      .catch(() => {}); // stay inactive on error or missing id
-  }, [id]);
+      .catch(() => {});
+  }, []);
 
   const isActive = config !== null && isDatetimeReached(config.availableDatetime);
   const text = config?.text ?? "";
