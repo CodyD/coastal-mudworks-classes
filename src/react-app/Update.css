@@ -6,9 +6,26 @@
   color: #1a1a1a;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
 .update h1 {
   font-size: 1.4rem;
-  margin-bottom: 1.5rem;
+  margin: 0;
+}
+
+.sign-in {
+  font-size: 0.875rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.sign-in:hover {
+  text-decoration: underline;
 }
 
 .update form {

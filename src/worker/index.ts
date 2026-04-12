@@ -38,7 +38,7 @@ async function isAuthenticated(request: Request, env: Env): Promise<boolean> {
 // Public: get the button config
 app.get("/api/config", async (c) => {
   const value = await c.env.BUTTON_CONFIG.get(CONFIG_KEY);
-  if (!value) return c.json({ error: "not found" }, 404);
+  if (!value) return c.json({ text: "", availableDatetime: "", url: "" });
   return c.json(JSON.parse(value) as ButtonConfig);
 });
 

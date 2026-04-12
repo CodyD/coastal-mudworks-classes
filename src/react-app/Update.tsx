@@ -17,7 +17,7 @@ function Update() {
     fetch("/api/config")
       .then((r) => (r.ok ? (r.json() as Promise<Config>) : Promise.reject()))
       .then(setForm)
-      .catch(() => setStatus("Could not load config — are you signed in?"));
+      .catch(() => {});
   }, []);
 
   function set(field: keyof Config, value: string) {
@@ -31,12 +31,19 @@ function Update() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
+    if (res.status === 401) {
+      window.location.href = "/cdn-cgi/access/login";
+      return;
+    }
     setStatus(res.ok ? "Saved." : "Save failed.");
   }
 
   return (
     <div className="update">
-      <h1>Button Settings</h1>
+      <div className="header">
+        <h1>Button Settings</h1>
+        <a href="/cdn-cgi/access/login" className="sign-in">Sign in</a>
+      </div>
       <form onSubmit={handleSave}>
         <label>
           Button Text
